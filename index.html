@@ -2,231 +2,352 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pannello di Controllo - Marianna</title>
-    <!-- Importiamo Tailwind CSS per la grafica -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Interfaccia Neurale - Marianna</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* Animazioni personalizzate per il cuore e le particelle */
-        @keyframes heartbeat-slow {
-            0%, 100% { transform: scale(1); opacity: 0.6; filter: drop-shadow(0 0 10px rgba(148, 163, 184, 0.5)); }
-            50% { transform: scale(1.05); opacity: 0.8; filter: drop-shadow(0 0 20px rgba(148, 163, 184, 0.8)); }
-        }
-        
-        @keyframes heartbeat-fast {
-            0% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(244, 63, 94, 0.8)); }
-            15% { transform: scale(1.15); filter: drop-shadow(0 0 40px rgba(244, 63, 94, 1)); }
-            30% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(244, 63, 94, 0.8)); }
-            45% { transform: scale(1.15); filter: drop-shadow(0 0 40px rgba(244, 63, 94, 1)); }
-            100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(244, 63, 94, 0.8)); }
+        :root {
+            --bg-color-1: #0f172a; /* Slate 900 */
+            --bg-color-2: #1e1b4b; /* Indigo 950 */
+            --bg-color-3: #082f49; /* Sky 900 */
+            --accent-color: #38bdf8; /* Sky 400 */
         }
 
-        @keyframes float-up {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 0.8; }
-            100% { transform: translateY(-20vh) scale(1.5); opacity: 0; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
         }
 
-        .animate-heart-slow { animation: heartbeat-slow 3s ease-in-out infinite; }
-        .animate-heart-fast { animation: heartbeat-fast 1.2s ease-in-out infinite; }
-
-        .particle {
+        /* Sfondo animato fluido */
+        .animated-bg {
             position: absolute;
-            bottom: -10%;
-            animation: float-up 5s ease-in forwards;
-            pointer-events: none;
-            color: rgba(251, 113, 133, 0.6);
+            top: -50%; left: -50%; right: -50%; bottom: -50%;
+            background: linear-gradient(45deg, var(--bg-color-1), var(--bg-color-2), var(--bg-color-3), var(--bg-color-1));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            transition: all 2s ease-in-out;
+            z-index: -2;
         }
 
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        
-        /* Utility per il fade in */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        /* Pannello di vetro ultra-raffinato */
+        .premium-glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
-        .animate-fade-in-up { animation: fadeInUp 0.5s ease-out forwards; }
+
+        /* Anelli di energia pulsanti */
+        .energy-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid var(--accent-color);
+            opacity: 0;
+            animation: ripple 4s linear infinite;
+        }
+        .energy-ring:nth-child(2) { animation-delay: 1.3s; }
+        .energy-ring:nth-child(3) { animation-delay: 2.6s; }
+
+        @keyframes ripple {
+            0% { transform: scale(0.8); opacity: 0; border-width: 2px; }
+            20% { opacity: 0.5; }
+            100% { transform: scale(2.5); opacity: 0; border-width: 0px; }
+        }
+
+        /* Cuore */
+        .heart-core {
+            filter: drop-shadow(0 0 15px var(--accent-color));
+            transition: all 1s ease;
+        }
+        .beating-slow { animation: pulseHeart 3s ease-in-out infinite; }
+        .beating-fast { animation: pulseHeartFast 1s ease-in-out infinite; }
+
+        @keyframes pulseHeart {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+        @keyframes pulseHeartFast {
+            0%, 100% { transform: scale(1); }
+            30% { transform: scale(1.2); }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(1.2); }
+        }
+
+        /* Bottone Magico */
+        .magic-btn {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .magic-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 25px -5px var(--accent-color);
+            border-color: rgba(255,255,255,0.4);
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
+        }
+        .magic-btn:active { transform: translateY(1px) scale(0.98); }
+
+        /* Particelle Fluttuanti (Lucciole/Cuori) */
+        .floating-particle {
+            position: absolute;
+            bottom: -20px;
+            pointer-events: none;
+            animation: floatUp var(--duration) ease-in forwards;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 0; }
+            20% { opacity: var(--max-opacity); }
+            80% { opacity: var(--max-opacity); }
+            100% { transform: translateY(-120vh) scale(1.5) rotate(var(--rotation)); opacity: 0; }
+        }
+
+        /* Utility tipografiche */
+        .font-quicksand { font-family: 'Quicksand', sans-serif; }
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     </style>
 </head>
-<body class="m-0 overflow-hidden text-slate-200 antialiased font-sans">
+<body class="text-white h-screen w-screen flex items-center justify-center">
 
-    <!-- Sfondo principale -->
-    <div id="app-container" class="relative min-h-screen flex items-center justify-center p-4 transition-all duration-[3000ms] ease-in-out bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950">
+    <!-- Sfondo Animato -->
+    <div id="bg-layer" class="animated-bg"></div>
+    
+    <!-- Sovrapposizione scura per contrasto -->
+    <div class="absolute inset-0 bg-black/30 z-[-1]"></div>
+
+    <!-- Contenitore Particelle -->
+    <div id="particles-layer" class="absolute inset-0 z-0 overflow-hidden pointer-events-none"></div>
+
+    <!-- Main Card -->
+    <main class="premium-glass relative z-10 w-[90%] max-w-[420px] rounded-[2.5rem] p-8 sm:p-10 flex flex-col items-center text-center transition-all duration-1000 ease-in-out">
         
-        <!-- Contenitore particelle (cuoricini che volano) -->
-        <div id="particles-container" class="absolute inset-0 overflow-hidden pointer-events-none z-0"></div>
+        <!-- Header Tecnologico -->
+        <header class="w-full flex justify-between items-center mb-12 text-xs tracking-[0.2em] font-semibold text-white/50">
+            <div class="flex items-center gap-2">
+                <div id="status-dot" class="w-2 h-2 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)] animate-pulse"></div>
+                <span>NODO_MRNN</span>
+            </div>
+            <span id="system-phase">FASE: 1.0</span>
+        </header>
 
-        <!-- Pannello di Vetro Centrale -->
-        <div class="glass-panel relative z-10 w-full max-w-lg rounded-3xl p-8 sm:p-12 flex flex-col items-center text-center overflow-hidden transition-all duration-1000">
+        <!-- Nucleo Centrale (Cuore + Anelli) -->
+        <div class="relative flex items-center justify-center w-40 h-40 mb-10">
+            <!-- Anelli di energia -->
+            <div id="rings-container" class="absolute inset-0 flex items-center justify-center">
+                <div class="energy-ring w-full h-full"></div>
+                <div class="energy-ring w-full h-full"></div>
+                <div class="energy-ring w-full h-full"></div>
+            </div>
             
-            <!-- Intestazione -->
-            <div class="w-full flex justify-between items-center mb-10 text-white/50 text-xs font-mono tracking-widest uppercase">
-                <span class="flex items-center gap-2">
-                    <!-- Icona Activity -->
-                    <svg id="icon-activity" class="text-cyan-500 transition-colors duration-1000" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                    ID: MARIANNA_01
-                </span>
-                <span>V 2.0.0</span>
-            </div>
+            <!-- Glow dietro il cuore -->
+            <div id="heart-glow-bg" class="absolute w-24 h-24 rounded-full bg-sky-500/20 blur-2xl transition-all duration-1000"></div>
 
-            <!-- Grafica Cuore -->
-            <div class="relative mb-10">
-                <!-- Aura luminosa dietro il cuore -->
-                <div id="heart-glow" class="absolute inset-0 rounded-full blur-3xl transition-all duration-[2000ms] bg-cyan-500/10 opacity-50"></div>
-                
-                <!-- Icona Cuore -->
-                <svg id="main-heart" class="relative transition-all duration-1000 text-slate-400 animate-heart-slow" width="140" height="140" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                </svg>
-            </div>
+            <!-- SVG Cuore -->
+            <svg id="core-heart" class="heart-core text-sky-300 beating-slow z-10" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+            </svg>
+        </div>
 
-            <!-- Testo di Stato -->
-            <div class="h-24 flex flex-col justify-center transition-all duration-500">
-                <h2 id="status-title" class="text-2xl sm:text-3xl font-bold tracking-tight mb-2 text-slate-200 transition-colors">
-                    Risparmio Emotivo
-                </h2>
-                <p id="status-subtitle" class="text-sm font-medium tracking-widest uppercase transition-colors duration-1000 text-cyan-500/80">
-                    STATO: ATTIVO
-                </p>
-            </div>
-
-            <!-- Descrizione -->
-            <p id="status-desc" class="mt-4 mb-10 text-white/70 text-sm sm:text-base font-light leading-relaxed max-w-xs mx-auto transition-all">
-                I protocolli di difesa limitano l'energia emotiva per prevenire ferite al sistema centrale.
+        <!-- Testi -->
+        <div class="min-h-[120px] flex flex-col justify-center">
+            <h1 id="title-text" class="font-quicksand text-3xl font-bold mb-3 tracking-wide text-white drop-shadow-lg transition-all duration-700">
+                Risparmio Emotivo
+            </h1>
+            <p id="desc-text" class="text-white/60 text-sm leading-relaxed font-light px-2 transition-all duration-700">
+                Protocolli di sicurezza attivi. Il sistema trattiene le emozioni per evitare sovraccarichi al nucleo.
             </p>
+        </div>
 
-            <!-- Pulsante di Sblocco -->
-            <button id="unlock-btn" class="group relative overflow-hidden rounded-full font-semibold tracking-wide text-sm sm:text-base px-8 py-4 transition-all duration-300 bg-white/10 text-white hover:bg-white/20 border border-white/20 hover:border-white/50">
-                <div class="flex items-center gap-3">
-                    <!-- Icona Lucchetto Chiuso -->
-                    <svg id="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:scale-110 transition-transform">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                    </svg>
-                    <span id="btn-text">DISINSTALLA PAURE</span>
-                </div>
+        <!-- Pulsante o Messaggio di Successo -->
+        <div class="mt-8 w-full relative flex flex-col justify-center items-center min-h-[60px]">
+            <button id="action-btn" class="magic-btn absolute w-full rounded-full py-4 px-6 font-semibold tracking-widest text-sm flex items-center justify-center gap-3 overflow-hidden group">
+                <svg id="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:scale-110">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <span id="btn-text">SBLOCCA CUORE</span>
+                
+                <!-- Effetto luce sul bottone al passaggio del mouse -->
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] group-hover:animate-[shimmer_2s_infinite] skew-x-12"></div>
             </button>
 
-            <!-- Messaggio di Successo (Nascosto all'inizio) -->
-            <div id="success-msg" class="hidden items-center gap-2 text-rose-100 animate-fade-in-up">
-                <svg class="text-amber-300" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.28 1.28L3 12l5.8 1.9a2 2 0 0 1 1.28 1.28L12 21l1.9-5.8a2 2 0 0 1 1.28-1.28L21 12l-5.8-1.9a2 2 0 0 1-1.28-1.28Z"></path></svg>
-                <span class="font-medium text-lg">Pronta per vivere al 100%</span>
-                <svg class="text-amber-300" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.28 1.28L3 12l5.8 1.9a2 2 0 0 1 1.28 1.28L12 21l1.9-5.8a2 2 0 0 1 1.28-1.28L21 12l-5.8-1.9a2 2 0 0 1-1.28-1.28Z"></path></svg>
+            <!-- Testo di successo e Pulsante AMA (inizialmente nascosti) -->
+            <div id="success-container" class="w-full flex flex-col items-center gap-5 opacity-0 scale-90 pointer-events-none transition-all duration-700 absolute">
+                <div class="flex items-center justify-center gap-2 font-quicksand font-bold text-lg text-rose-200">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-amber-300"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    Pronta a vivere al 100%
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-amber-300"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                </div>
+                
+                <!-- NUOVO PULSANTE AMA -->
+                <button id="ama-btn" class="magic-btn w-full rounded-full py-4 px-6 font-semibold tracking-widest text-base flex items-center justify-center gap-3 overflow-hidden group shadow-[0_0_25px_rgba(251,113,133,0.4)] border-rose-400/50 bg-gradient-to-r from-rose-500/20 to-pink-500/20 hover:from-rose-500/40 hover:to-pink-500/40 text-white">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="text-rose-300 animate-pulse"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    <span>AMA</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-[150%] group-hover:animate-[shimmer_2s_infinite] skew-x-12"></div>
+                </button>
             </div>
         </div>
-    </div>
+    </main>
 
-    <!-- Script Logica Javascript -->
-    <script>
-        const btn = document.getElementById('unlock-btn');
-        const btnText = document.getElementById('btn-text');
-        const btnIcon = document.getElementById('btn-icon');
-        const container = document.getElementById('app-container');
-        const iconActivity = document.getElementById('icon-activity');
-        const heartGlow = document.getElementById('heart-glow');
-        const mainHeart = document.getElementById('main-heart');
-        const statusTitle = document.getElementById('status-title');
-        const statusSubtitle = document.getElementById('status-subtitle');
-        const statusDesc = document.getElementById('status-desc');
-        const successMsg = document.getElementById('success-msg');
-        const particlesContainer = document.getElementById('particles-container');
-
-        let particleInterval;
-
-        btn.addEventListener('click', () => {
-            // FASE 1: Caricamento
-            btnText.innerText = 'DISATTIVAZIONE IN CORSO...';
-            
-            // Cambia l'icona in un lucchetto che si apre
-            btnIcon.innerHTML = '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path>';
-            btnIcon.classList.remove('group-hover:scale-110');
-            btnIcon.classList.add('animate-pulse');
-            
-            // Stile pulsante "in attesa"
-            btn.classList.add('bg-cyan-900/50', 'text-cyan-300', 'border-cyan-500/30', 'cursor-wait');
-            btn.classList.remove('bg-white/10', 'hover:bg-white/20', 'border-white/20', 'hover:border-white/50');
-            
-            // Il cuore inizia a battere in modo irregolare
-            mainHeart.classList.remove('text-slate-400', 'animate-heart-slow');
-            mainHeart.classList.add('text-cyan-300', 'animate-pulse');
-
-            // FASE 2: Sblocco emotivo (dopo 1.5 secondi)
-            setTimeout(() => {
-                // Nascondi pulsante e mostra messaggio di successo
-                btn.style.display = 'none';
-                successMsg.classList.remove('hidden');
-                successMsg.classList.add('flex');
-
-                // Cambia lo sfondo da freddo a caldo/romantico
-                container.classList.remove('from-slate-950', 'via-slate-900', 'to-cyan-950');
-                container.classList.add('from-fuchsia-800', 'via-rose-500', 'to-amber-500');
-
-                // Cambia colori icone
-                iconActivity.classList.remove('text-cyan-500');
-                iconActivity.classList.add('text-rose-300');
-
-                // Accendi l'aura del cuore
-                heartGlow.classList.remove('bg-cyan-500/10', 'opacity-50');
-                heartGlow.classList.add('bg-rose-500/50', 'opacity-100');
-
-                // Fai battere forte il cuore e riempilo di colore
-                mainHeart.classList.remove('text-cyan-300', 'animate-pulse');
-                mainHeart.classList.add('text-rose-500', 'animate-heart-fast');
-                mainHeart.setAttribute('fill', 'currentColor');
-                mainHeart.setAttribute('stroke-width', '0');
-
-                // Aggiorna i testi
-                statusTitle.innerText = 'Libertà Totale';
-                statusTitle.classList.remove('text-slate-200');
-                statusTitle.classList.add('text-white', 'drop-shadow-md');
-
-                statusSubtitle.innerText = 'SISTEMA SBLOCCATO';
-                statusSubtitle.classList.remove('text-cyan-500/80');
-                statusSubtitle.classList.add('text-amber-200', 'drop-shadow');
-
-                statusDesc.innerText = 'Tutti i firewall difensivi sono stati rimossi. Nessun limite alla capacità di sentire, sorridere e amare.';
-                
-                // Avvia i cuoricini che volano verso l'alto
-                startParticles();
-            }, 1500);
-        });
-
-        // Funzione per generare particelle (cuoricini)
-        function startParticles() {
-            particleInterval = setInterval(() => {
-                // Rimuove particelle vecchie per non appesantire il browser
-                if (particlesContainer.children.length > 30) {
-                    particlesContainer.removeChild(particlesContainer.firstChild);
-                }
-                
-                // Crea un nuovo cuore SVG
-                const heart = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                heart.setAttribute('viewBox', '0 0 24 24');
-                heart.setAttribute('fill', 'currentColor');
-                heart.setAttribute('class', 'particle');
-                
-                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                path.setAttribute('d', 'M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z');
-                heart.appendChild(path);
-
-                // Posizione, grandezza e velocità casuali
-                const size = Math.random() * 20 + 10;
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.width = size + 'px';
-                heart.style.height = size + 'px';
-                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                heart.style.animationDelay = (Math.random() * 1) + 's';
-
-                particlesContainer.appendChild(heart);
-            }, 300);
+    <!-- CSS per l'animazione del bottone -->
+    <style>
+        @keyframes shimmer {
+            100% { transform: translateX(150%) skewX(12deg); }
         }
+    </style>
+
+    <script>
+        // Aspettiamo che tutto sia caricato in modo sicuro
+        document.addEventListener('DOMContentLoaded', () => {
+            const root = document.documentElement;
+            const btn = document.getElementById('action-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnIcon = document.getElementById('btn-icon');
+            const coreHeart = document.getElementById('core-heart');
+            const heartGlowBg = document.getElementById('heart-glow-bg');
+            const titleText = document.getElementById('title-text');
+            const descText = document.getElementById('desc-text');
+            const statusDot = document.getElementById('status-dot');
+            const systemPhase = document.getElementById('system-phase');
+            const successContainer = document.getElementById('success-container');
+            const amaBtn = document.getElementById('ama-btn');
+            const particlesLayer = document.getElementById('particles-layer');
+
+            let isUnlocked = false;
+            let fireflyInterval = setInterval(() => createParticle('firefly'), 800);
+
+            // Funzione per il pulsante AMA (WhatsApp)
+            const apriWhatsApp = (e) => {
+                if (e && e.type === 'touchstart') e.preventDefault();
+                
+                // INSERISCI QUI IL TUO NUMERO VERO (DEVE INIZIARE CON 39)
+                const mioNumero = "393319258349"; 
+                
+                const messaggio = encodeURIComponent("Hai vinto un bacio ❤️");
+                window.open(`https://wa.me/${mioNumero}?text=${messaggio}`, '_blank');
+            };
+
+            // Event Listeners per il nuovo pulsante AMA
+            amaBtn.addEventListener('click', apriWhatsApp);
+            amaBtn.addEventListener('touchstart', apriWhatsApp, {passive: false});
+
+            // Funzione di sblocco sicura
+            const avviaSblocco = (e) => {
+                if (e && e.type === 'touchstart') e.preventDefault(); // Evita doppi click su mobile
+                if (isUnlocked) return;
+                isUnlocked = true; // Blocca subito altri click
+
+                // FASE 1: ATTESA E TRANSIZIONE
+                btnText.innerText = 'RIMOZIONE FIREWALL...';
+                // Nascondiamo l'icona in modo sicuro per tutti i browser
+                btnIcon.style.display = 'none';
+                
+                btn.style.background = 'rgba(255,255,255,0.05)';
+                btn.style.cursor = 'wait';
+                
+                coreHeart.classList.remove('beating-slow');
+                coreHeart.classList.add('animate-pulse');
+
+                // FASE 2: SBLOCCO (dopo 1.5 secondi)
+                setTimeout(() => {
+                    clearInterval(fireflyInterval);
+
+                    // Cambia Colori
+                    root.style.setProperty('--bg-color-1', '#4c0519'); 
+                    root.style.setProperty('--bg-color-2', '#831843'); 
+                    root.style.setProperty('--bg-color-3', '#d97706'); 
+                    root.style.setProperty('--accent-color', '#fb7185'); 
+
+                    // Interfaccia
+                    statusDot.classList.remove('bg-sky-400', 'shadow-[0_0_8px_rgba(56,189,248,0.8)]');
+                    statusDot.classList.add('bg-rose-400', 'shadow-[0_0_8px_rgba(251,113,133,0.8)]');
+                    systemPhase.innerText = 'FASE: INFINITA';
+
+                    // Cuore
+                    coreHeart.classList.remove('animate-pulse', 'text-sky-300');
+                    coreHeart.classList.add('beating-fast', 'text-rose-500');
+                    coreHeart.setAttribute('fill', 'currentColor');
+                    coreHeart.setAttribute('stroke-width', '0');
+                    
+                    heartGlowBg.classList.remove('bg-sky-500/20');
+                    heartGlowBg.classList.add('bg-rose-500/40', 'scale-150');
+
+                    // Testi
+                    titleText.innerText = 'Libertà Emotiva';
+                    titleText.classList.add('text-rose-100');
+                    descText.innerText = 'Difese abbassate con successo. Nessun filtro, nessuna paura. Solo pura capacità di sentire e amare.';
+                    descText.classList.add('text-rose-100/80');
+
+                    // Bottone
+                    btn.style.opacity = '0';
+                    btn.style.transform = 'scale(0.8)';
+                    setTimeout(() => {
+                        btn.style.display = 'none';
+                        successContainer.classList.remove('absolute', 'opacity-0', 'scale-90', 'pointer-events-none');
+                        successContainer.classList.add('relative', 'opacity-100', 'scale-100', 'pointer-events-auto');
+                    }, 400);
+
+                    // Particelle
+                    for(let i=0; i<15; i++) {
+                        setTimeout(() => createParticle('heart'), Math.random() * 1000);
+                    }
+                    setInterval(() => createParticle('heart'), 300);
+
+                }, 1500);
+            };
+
+            // Event Listeners (Mouse + Touch)
+            btn.addEventListener('click', avviaSblocco);
+            btn.addEventListener('touchstart', avviaSblocco, {passive: false});
+
+            // Funzione Generazione Particelle
+            function createParticle(type) {
+                const el = document.createElement('div');
+                el.classList.add('floating-particle');
+                
+                const size = type === 'heart' ? Math.random() * 20 + 10 : Math.random() * 4 + 2;
+                const left = Math.random() * 100;
+                const duration = Math.random() * 4 + 4;
+                const rotation = Math.random() * 360 - 180;
+                
+                el.style.left = `${left}%`;
+                el.style.width = `${size}px`;
+                el.style.height = `${size}px`;
+                el.style.setProperty('--duration', `${duration}s`);
+                el.style.setProperty('--rotation', `${rotation}deg`);
+
+                if (type === 'firefly') {
+                    el.style.setProperty('--max-opacity', '0.6');
+                    el.style.backgroundColor = '#38bdf8';
+                    el.style.borderRadius = '50%';
+                    el.style.boxShadow = '0 0 10px #38bdf8';
+                } else {
+                    el.style.setProperty('--max-opacity', '0.8');
+                    el.style.color = Math.random() > 0.5 ? '#fb7185' : '#fcd34d';
+                    el.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>`;
+                }
+
+                particlesLayer.appendChild(el);
+                setTimeout(() => { if(particlesLayer.contains(el)) el.remove(); }, duration * 1000);
+            }
+        });
     </script>
 </body>
 </html>
