@@ -142,7 +142,7 @@
         <header class="w-full flex justify-between items-center mb-12 text-xs tracking-[0.2em] font-semibold text-white/50">
             <div class="flex items-center gap-2">
                 <div id="status-dot" class="w-2 h-2 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)] animate-pulse"></div>
-                <span>NODO_MRNN</span>
+                <span>EMOZIONI_MARI🌙</span>
             </div>
             <span id="system-phase">FASE: 1.0</span>
         </header>
@@ -188,20 +188,13 @@
                 <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] group-hover:animate-[shimmer_2s_infinite] skew-x-12"></div>
             </button>
 
-            <!-- Testo di successo e Pulsante AMA (inizialmente nascosti) -->
+            <!-- Testo di successo (inizialmente nascosto) -->
             <div id="success-container" class="w-full flex flex-col items-center gap-5 opacity-0 scale-90 pointer-events-none transition-all duration-700 absolute">
                 <div class="flex items-center justify-center gap-2 font-quicksand font-bold text-lg text-rose-200">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-amber-300"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                     Pronta a vivere al 100%
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-amber-300"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                 </div>
-                
-                <!-- NUOVO PULSANTE AMA -->
-                <button id="ama-btn" class="magic-btn w-full rounded-full py-4 px-6 font-semibold tracking-widest text-base flex items-center justify-center gap-3 overflow-hidden group shadow-[0_0_25px_rgba(251,113,133,0.4)] border-rose-400/50 bg-gradient-to-r from-rose-500/20 to-pink-500/20 hover:from-rose-500/40 hover:to-pink-500/40 text-white">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="text-rose-300 animate-pulse"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                    <span>AMA</span>
-                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-[150%] group-hover:animate-[shimmer_2s_infinite] skew-x-12"></div>
-                </button>
             </div>
         </div>
     </main>
@@ -227,26 +220,10 @@
             const statusDot = document.getElementById('status-dot');
             const systemPhase = document.getElementById('system-phase');
             const successContainer = document.getElementById('success-container');
-            const amaBtn = document.getElementById('ama-btn');
             const particlesLayer = document.getElementById('particles-layer');
 
             let isUnlocked = false;
             let fireflyInterval = setInterval(() => createParticle('firefly'), 800);
-
-            // Funzione per il pulsante AMA (WhatsApp)
-            const apriWhatsApp = (e) => {
-                if (e && e.type === 'touchstart') e.preventDefault();
-                
-                // INSERISCI QUI IL TUO NUMERO VERO (DEVE INIZIARE CON 39)
-                const mioNumero = "393319258349"; 
-                
-                const messaggio = encodeURIComponent("Hai vinto un bacio ❤️");
-                window.open(`https://wa.me/${mioNumero}?text=${messaggio}`, '_blank');
-            };
-
-            // Event Listeners per il nuovo pulsante AMA
-            amaBtn.addEventListener('click', apriWhatsApp);
-            amaBtn.addEventListener('touchstart', apriWhatsApp, {passive: false});
 
             // Funzione di sblocco sicura
             const avviaSblocco = (e) => {
